@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzy.core.dao.UserDao">
+  <select id="findUser" parameterType="String" resultType="user">
+  	select *
+  	from sys_user
+  	where user_code= #{usercode}
+  	and user_password = #{password}
+  	and user_state="1"
+  </select>
+</mapper>

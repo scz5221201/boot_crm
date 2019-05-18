@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzy.core.dao.CustomerDao">
+	
+	<sql id="selectCustomerListWhere">
+		<where>
+			<if test="cust_name!= null">
+				cust_name like "%"#{cust_name}"%"
+			</if>
+			<if test="cust_source!= null">
+				cust_source like "%"#{cust_source}"%"
+			</if>
+			<if test="cust_industry!= null">
+				cust_industry like "%"#{cust_industry}"%"
+			</if>
+			<if test="cust_level!= null">
+				cust_level like "%"#{cust_level}"%"
+			</if>
+		</where>
+	</sql>
+	
+	<select id="selectCustomerList" parameterMap="customer" resultType="customer">
+		
+		SELECT
+			cust_id,
+			cust_name,
+			cust_user_id,
+			cust_create_id,
+			b.dict_item_name cust_source,
+			b.dict_item_name cust_industry,
+			b.dict_item_name cust_level,
+			cust_linkman,
+			cust_phone,
+			cust_mobile,
+			cust_createtime
+		FROM
+			customer a
+		LEFT JION {
+			SELECT
+				dict_id,
+				dict_item_name
+			FROM
+				base_dict
+			WHERE
+				dict_type_code = '002'
+		} b ON a.cust_source = b.dict_id
+		LEFT JION {
+			SELECT
+				dict_id,
+				dict_item_name
+			FROM
+				base_dict
+			WHERE
+				dict_type_code = '001'
+		} b ON a.cust_source = b.dict_id
+		LEFT JION {
+			SELECT
+				dict_id,
+				dict_item_name
+			FROM
+				base_dict
+			WHERE
+				dict_type_code = '006'
+		} b ON a.cust_source = b.dict_id
+		<include refid="selectCustomerListWhere"/>
+		
+		<!-- 分页查询 -->
+		<if test="start != numm and rows != null">
+			limit #{start}, #{rows}
+		</if>
+	</select>
+	
+	<!-- 查询客户总数 -->
+	<select id="selectCustomerListCount" parameterType="customer" resultType="Integer">
+		select count(*) from customer
+		<include refid="selectCustomerListWhere"/>
+	</select>
+	
+	
+</mapper>
