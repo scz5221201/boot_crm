@@ -2,12 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%-- <%@ taglib prefix="itheima" uri="http://www.itheima.com/"%> --%>
+<%-- <%@ taglib prefix="hzy" uri="http://www.itheima.com/"%> --%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() 
 	                   + ":" + request.getServerPort() + path + "/";
 %>
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -243,7 +244,7 @@
 							<c:forEach items="${fromType}" var="item">
 								<option value="${item.dict_id}"
 								       <c:if test="${item.dict_id == custSource}">selected</c:if>>
-								    ${item.dict_item_name }
+								    ${item.dict_item_name}
 								</option>
 							</c:forEach>
 						</select>

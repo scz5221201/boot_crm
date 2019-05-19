@@ -23,7 +23,7 @@ public class UserController {
 		User user=userService.findUser(usercode, password);
 		if (user!=null) {
 			session.setAttribute("USER_SESSION", user);
-			return "customer";
+			return "customer2";
 		}
 		model.addAttribute("msg", "ÕËºÅ»òÃÜÂë´íÎó£¬ÇëÖØĞÂÊäÈë");
 		return "login";
@@ -31,7 +31,7 @@ public class UserController {
 	
 	@RequestMapping(value="/toCustomer.action")
 	public String toCustomer() {
-		return "customer";
+		return "customer2";
 	}
 	
 	@RequestMapping(value="/logout.action")

@@ -17,7 +17,8 @@ public class BaseDictServiceImpl implements BaseDictService {
 	
 	@Override
 	public List<BaseDict> findBaseDictByTypeCode(String typecode) {
-		return this.baseDictDao.selectBaseDictByTypeCode(typecode);
+		List<BaseDict> list = this.baseDictDao.selectBaseDictByTypeCode(typecode);
+		return list;
 		
 	}
 

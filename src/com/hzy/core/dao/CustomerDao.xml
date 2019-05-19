@@ -19,7 +19,7 @@
 		</where>
 	</sql>
 	
-	<select id="selectCustomerList" parameterMap="customer" resultType="customer">
+	<select id="selectCustomerList" parameterType="customer" resultType="customer">
 		
 		SELECT
 			cust_id,
@@ -27,8 +27,8 @@
 			cust_user_id,
 			cust_create_id,
 			b.dict_item_name cust_source,
-			b.dict_item_name cust_industry,
-			b.dict_item_name cust_level,
+			c.dict_item_name cust_industry,
+			d.dict_item_name cust_level,
 			cust_linkman,
 			cust_phone,
 			cust_mobile,
@@ -52,7 +52,7 @@
 				base_dict
 			WHERE
 				dict_type_code = '001'
-		} b ON a.cust_source = b.dict_id
+		} c ON a.cust_source = c.dict_id
 		LEFT JION {
 			SELECT
 				dict_id,
@@ -61,7 +61,7 @@
 				base_dict
 			WHERE
 				dict_type_code = '006'
-		} b ON a.cust_source = b.dict_id
+		} d ON a.cust_source = d.dict_id
 		<include refid="selectCustomerListWhere"/>
 		
 		<!-- 分页查询 -->

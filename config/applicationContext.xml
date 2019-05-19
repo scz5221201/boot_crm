@@ -34,6 +34,11 @@
          <!--初始化连接数  -->
          <property name="initialSize" value="${jdbc.initialSize}" />
 	</bean>
+	
+	<!-- <bean id="jdbcTemplate" class="prg.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"/>
+	</bean> -->
+	
 	<!-- 事务管理器 -->
 	<bean id="transactionManager" class=
 	"org.springframework.jdbc.datasource.DataSourceTransactionManager">

@@ -38,23 +38,32 @@ public class CustomerController {
 	
 	public String list(@RequestParam(defaultValue="1")Integer page,
 					   @RequestParam(defaultValue="10")Integer rows,
-					   String custName, String custSource, String custIndustry,
-					   String custLevel, Model model) {
+					   @RequestParam(defaultValue="小张")String custName, 
+					   @RequestParam(defaultValue="7")String custSource, 
+					   @RequestParam(defaultValue="3")String custIndustry,
+					   @RequestParam(defaultValue="23")String custLevel, Model model) {
 		/* 条件查询所有客户 */
 		Page<Customer> customers = customerService.findCustomerList(page, rows, custName, custSource, custIndustry, custLevel);
 		model.addAttribute("page", customers);
 		
 		/* 客户来源 */
-		List<BaseDict> fromType=baseDictService.findBaseDictByTypeCode(FROM_TYPE);
+		List<BaseDict> fromType=this.baseDictService.findBaseDictByTypeCode(FROM_TYPE);
 		
 		/* 客户所属行业 */
-		List<BaseDict> industryType=baseDictService.findBaseDictByTypeCode(INDUSTRY_TYPE);
+		List<BaseDict> industryType=this.baseDictService.findBaseDictByTypeCode(INDUSTRY_TYPE);
 		
 		/* 客户级别 */
-		List<BaseDict> levelType = baseDictService.findBaseDictByTypeCode(LEVEL_TYPE);
+		List<BaseDict> levelType = this.baseDictService.findBaseDictByTypeCode(LEVEL_TYPE);
 		
+		model.addAttribute("fromType", fromType);
+		model.addAttribute("industryType", industryType);
+		model.addAttribute("levelType", levelType);
+		model.addAttribute("custName)", custName);
+		model.addAttribute("custSource", custSource);
+		model.addAttribute("custIndustry", custIndustry);
+		model.addAttribute("custLevel", custLevel);
 		
-		return "customer";
+		return "customer2";
 	}
 	
 	

@@ -29,6 +29,7 @@ public class NavigationTag extends TagSupport {
 		JspWriter writer = pageContext.getOut();
 		HttpServletRequest request = 
 				(HttpServletRequest) pageContext.getRequest();
+		@SuppressWarnings("rawtypes")
 		Page page = (Page) request.getAttribute(bean);
 		if (page == null)
 			return SKIP_BODY;
